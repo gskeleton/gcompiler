@@ -98,6 +98,8 @@ SC_VDEFINE int pc_recursion=FALSE;          /* enable detailed recursion report?
 SC_VDEFINE constvalue_root sc_automaton_tab = { NULL, NULL}; /* automaton table */
 SC_VDEFINE constvalue_root sc_state_tab = { NULL, NULL};   /* state table */
 
+SC_VDEFINE builtinstring builtin_strings={ NULL, 0, 0 }; /* string constants */
+
 SC_VDEFINE FILE *inpf    = NULL;   /* file read from (source or include) */
 SC_VDEFINE FILE *inpf_org= NULL;   /* main source file */
 SC_VDEFINE FILE *outf    = NULL;   /* (intermediate) text file written to */

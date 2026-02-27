@@ -303,6 +303,15 @@ typedef struct s_valuepair {
   long second;
 } valuepair;
 
+typedef struct s_builtinstring {
+  struct {
+    char name[sNAMEMAX+1];
+    char value[_MAX_PATH];
+  } *entries;
+  int count;
+  int size;
+} builtinstring;
+
 /* macros for code generation */
 #define opcodes(n)      ((n)*sizeof(cell))      /* opcode size */
 #define opargs(n)       ((n)*sizeof(cell))      /* size of typical argument */
@@ -883,6 +892,8 @@ SC_VDECL int pc_recursion;    /* enable detailed recursion report? */
 
 SC_VDECL constvalue_root sc_automaton_tab; /* automaton table */
 SC_VDECL constvalue_root sc_state_tab;     /* state table */
+
+SC_VDECL builtinstring builtin_strings; /* string constants */
 
 SC_VDECL FILE *inpf;          /* file read from (source or include) */
 SC_VDECL FILE *inpf_org;      /* main source file */
