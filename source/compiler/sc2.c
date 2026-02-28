@@ -131,6 +131,32 @@ SC_FUNC void clearstk(void)
   assert(stktop==0);
 }
 
+SC_FUNC void pragma_once_guard(void) {
+    char symname[sNAMEMAX];
+    char *ptr;
+    symbol *included;
+    strcpy(symname,"_inc_");
+    char dirsep=DIRSEP_CHAR;
+    if ((ptr=strrchr(inpfname,dirsep))!=NULL)
+      strlcat(symname,ptr+1,sizeof symname);
+    else
+      strlcat(symname,inpfname,sizeof symname);
+    included=find_symbol(&glbtab,symname,fcurrent,-1,NULL);
+    if (included==NULL)
+      /* couldn't find '_inc_includename' in symbols table */
+      /* add symname ('_inc_includename') to global symbols table */
+      add_constant(symname,1,sGLOBAL,0);
+    else {
+      /* found '_inc_includename' symbol in global symbols table  */
+      if (!SKIPPING) {
+        assert(inpf!=NULL);
+        if (inpf!=inpf_org)
+          pc_closesrc(inpf); /* close input file (like #endinput) */
+        inpf=NULL;
+      } /* if */
+    }
+}
+
 SC_FUNC void normalize_path(char *path) {
     /* normalize directory separator character */
     #if DIRSEP_CHAR!='\\' /* linux */
@@ -1289,28 +1315,7 @@ static int command(void)
             error(207);         /* unknown #pragma */
           }
         } else if (strcmp(str,"once")==0) {
-            char symname[sNAMEMAX];
-            char *ptr;
-            symbol *included;
-            strcpy(symname,"_inc_");
-            char dirsep=DIRSEP_CHAR;
-            if ((ptr=strrchr(inpfname,dirsep))!=NULL)
-              strlcat(symname,ptr+1,sizeof symname);
-            else
-              strlcat(symname,inpfname,sizeof symname);
-            included=find_symbol(&glbtab,symname,fcurrent,-1,NULL);
-            if (included==NULL)
-              /* couldn't find '_inc_includename' in symbols table */
-              add_constant(symname,1,sGLOBAL,0); /* add symname ('_inc_includename') to global symbols table */
-            else {
-              /* found '_inc_includename' symbol in global symbols table  */
-              if (!SKIPPING) {
-                assert(inpf!=NULL);
-                if (inpf!=inpf_org)
-                  pc_closesrc(inpf); /* close input file (like #endinput) */
-                inpf=NULL;
-              } /* if */
-            }
+          pragma_once_guard();
         } else if (strcmp(str,"compat")==0) {
           ; /* empty statement - ignore */
         } else if (strcmp(str,"option")==0) {

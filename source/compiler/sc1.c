@@ -1216,6 +1216,17 @@ static void parseoptions(int argc,char **argv,char *oname,char *ename,char *pnam
         if (sc_asmfile && verbosity>1)
           verbosity=1;
         break;
+      case 'G':
+        switch (*option_value(ptr)) {
+        case '+':
+          pragma_once_guard();
+          break;
+        case '-':
+          break;
+        default:
+          break;
+        }
+        break;
       case 'E':
         switch (*option_value(ptr)) {
         case '+':
@@ -1540,6 +1551,7 @@ static void about(void)
     pc_printf("         -w<num>  disable a specific warning by its number\n");
     pc_printf("         -X<num>  abstract machine size limit in bytes\n");
     pc_printf("         -XD<num> abstract machine data/stack size limit in bytes\n");
+    pc_printf("         -G[+/-]  enable/disable include guard to prevent multiple inclusions\n");
     pc_printf("         -E[+/-]  turn warnings in to errors\n");
     pc_printf("         -\\       use '\\' for escape characters\n");
     pc_printf("         -^       use '^' for escape characters\n");
