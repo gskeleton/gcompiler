@@ -283,7 +283,7 @@ static cell AMX_NATIVE_CALL n_floatsin(AMX *amx,const cell *params)
     */
     REAL fA = amx_ctof(params[1]);
     fA = ToRadians(fA, params[2]);
-    fA = sin(fA);
+    fA = (REAL)sin(fA);
     (void)amx;
     return amx_ftoc(fA);
 }
@@ -298,7 +298,7 @@ static cell AMX_NATIVE_CALL n_floatcos(AMX *amx,const cell *params)
     */
     REAL fA = amx_ctof(params[1]);
     fA = ToRadians(fA, params[2]);
-    fA = cos(fA);
+    fA = (REAL)(fA);
     (void)amx;
     return amx_ftoc(fA);
 }
@@ -313,7 +313,7 @@ static cell AMX_NATIVE_CALL n_floattan(AMX *amx,const cell *params)
     */
     REAL fA = amx_ctof(params[1]);
     fA = ToRadians(fA, params[2]);
-    fA = tan(fA);
+    fA = (REAL)tan(fA);
     (void)amx;
     return amx_ftoc(fA);
 }
