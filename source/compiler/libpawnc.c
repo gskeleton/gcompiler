@@ -108,7 +108,8 @@ int pc_printf(const char *message,...)
   va_start(argptr,message);
   ret=vprintf(message,argptr);
   va_end(argptr);
-
+  fflush(stdout);
+  
   return ret;
 }
 
