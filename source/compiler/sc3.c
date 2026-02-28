@@ -890,13 +890,13 @@ static int hier14(value *lval1)
   if (lval1->ident==iARRAYCHAR) {
     /* special case, assignment to packed character in a cell is permitted */
     lvalue=TRUE;
-  } else if (lval1->ident==iARRAY || lval1->ident==iREFARRAY) {
-    /* array assignment is permitted too (with restrictions) */
+ } else if (lval1->ident==iARRAY || lval1->ident==iREFARRAY) {
     if (oper)
-      return error(23); /* array assignment must be simple assignment */
-    assert(lval1->sym!=NULL);
+      return error(23);   /* array assignment must be simple assignment */
+    if (lval1->sym == NULL)
+      return error(17);     /* undefined symbol */
     if (array_totalsize(lval1->sym)==0)
-      return error(46,lval1->sym->name);        /* unknown array size */
+      return error(46,lval1->sym->name);  /* unknown array size */
     lvalue=TRUE;
   } /* if */
 
