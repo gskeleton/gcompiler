@@ -1497,7 +1497,7 @@ static int hier2(value *lval)
       tok=lex(&val,&st);
       switch (tok) {
       case tINC:                /* lval++ */
-       if (matchtoken(tNEW) || matchtoken(tREL)) {
+       if (matchtoken(tNEW) || matchtoken(tVAR)) {
           lexpush();                /* to avoid subsequent "shadowing" warnings */
           return error(22);         /* must be lvalue */
         } /* if */

@@ -6,7 +6,7 @@
 main()
     state green_wait_interim
 
-rel bool: button_memo <red_wait, green_wait_interim, yellow_wait>
+*var bool: button_memo <red_wait, green_wait_interim, yellow_wait>
 
 @keypressed(key)
     {

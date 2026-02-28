@@ -11,10 +11,10 @@
  */
 main()
     {
-    rel day, month, year
+    *var day, month, year
     if (readdate(day, month, year))
         {
-        rel wkday = weekday(day, month, year)
+        *var wkday = weekday(day, month, year)
         printf "The date %d-%d-%d falls on a ", day, month, year
         switch (wkday)
             {
@@ -85,8 +85,8 @@ weekday(day, month, year)
     if (month <= 2)
         month += 12, --year
 
-    rel j = year % 100
-    rel e = year / 100
+    *var j = year % 100
+    *var e = year / 100
     return (day + (month+1)*26/10 + j + j/4 + e/4 - 2*e) % 7
     }
 

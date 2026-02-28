@@ -1803,7 +1803,7 @@ static void parse(void)
       emit_flags &= ~efGLOBAL;
       break;
     case tNEW:
-    case tREL:
+    case tVAR:
       if (getclassspec(tok,&fpublic,&fstatic,&fstock,&fconst))
         declglb(NULL,0,fpublic,fstatic,fstock,fconst);
       break;
@@ -5355,7 +5355,7 @@ static void statement(int *lastindent,int allow_decl)
     error(10);                  /* invalid function or declaration */
     /* fallthrough */
   case tNEW:
-  case tREL:
+  case tVAR:
     if (allow_decl) {
       declloc(FALSE);
       lastst=tNEW;
@@ -5368,7 +5368,7 @@ static void statement(int *lastindent,int allow_decl)
       decl_enum(sLOCAL,FALSE);
     else if (allow_decl) {
       declloc(TRUE);
-      lastst=tREL;
+      lastst=tVAR;
     } else {
       error(3);                 /* declaration only valid in a block */
     } /* if */
@@ -5782,7 +5782,7 @@ static int dofor(void)
   endtok= matchtoken('(') ? ')' : tDO;
   if (matchtoken(';')==0) {
     /* new variable declarations are allowed here */
-    if (matchtoken(tNEW) || matchtoken(tREL)) {
+    if (matchtoken(tNEW) || matchtoken(tVAR)) {
       /* The variable in expr1 of the for loop is at a
        * 'compound statement' level of it own.
        */

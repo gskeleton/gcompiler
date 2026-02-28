@@ -8,7 +8,7 @@ enum message
 
 main()
     {
-    rel msg[message]
+    *var msg[message]
 
     /* insert a few items (read from console input) */
     printf "Please insert a few messages and their priorities; \
@@ -35,8 +35,8 @@ main()
     }
 
 const queuesize = 10
-rel queue[queuesize][message]
-rel queueitems = 0
+*var queue[queuesize][message]
+*var queueitems = 0
 
 insert(const item[message])
     {
@@ -45,12 +45,12 @@ insert(const item[message])
         return false            /* queue is full */
 
     /* find the position to insert it to */
-    rel pos = queueitems        /* start at the bottom */
+    *var pos = queueitems        /* start at the bottom */
     while (pos > 0 && item[priority] > queue[pos-1][priority])
         --pos                   /* higher priority: move up a slot */
 
     /* make place for the item at the insertion spot */
-    for (rel i = queueitems; i > pos; --i)
+    for (*var i = queueitems; i > pos; --i)
         queue[i] = queue[i-1]
 
     /* add the message to the correct slot */
@@ -71,7 +71,7 @@ extract(item[message])
     --queueitems
 
     /* move the queue one position up */
-    for (rel i = 0; i < queueitems; ++i)
+    for (*var i = 0; i < queueitems; ++i)
         queue[i] = queue[i+1]
 
     return true

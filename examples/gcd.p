@@ -6,8 +6,8 @@
 main()
     {
     print "Input two values\n"
-    rel a = getvalue()
-    rel b = getvalue()
+    *var a = getvalue()
+    *var b = getvalue()
     while (a != b)
         if (a > b)
             a = a - b

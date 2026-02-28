@@ -3,7 +3,7 @@ bool: ispacked(string[])
 
 my_strlen(string[])
     {
-    rel len = 0
+    *var len = 0
     if (ispacked(string))
         while (string{len} != EOS)      /* get character from pack */
             ++len
@@ -17,15 +17,15 @@ strupper(string[])
     {
     assert ispacked(string)
 
-    for (rel i=0; string{i} != EOS; ++i)
+    for (*var i=0; string{i} != EOS; ++i)
         string{i} = toupper(string{i})
     }
 
 main()
     {
-    rel s[10]
+    *var s[10]
 
-    for (rel i = 0; i < 5; i++)
+    for (*var i = 0; i < 5; i++)
         s{i}=i+'a'
     s{5}=EOS
 

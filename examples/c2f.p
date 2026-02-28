@@ -2,8 +2,8 @@
 
 main()
     {
-    rel Rational: Celsius
-    rel Rational: Fahrenheit
+    *var Rational: Celsius
+    *var Rational: Fahrenheit
 
     print "Celsius\t Fahrenheit\n"
     for (Celsius = 5; Celsius <= 25; Celsius++)

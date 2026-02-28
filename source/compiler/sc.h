@@ -389,7 +389,7 @@ typedef struct s_builtinstring {
 #define tSTOCK      310
 #define tSWITCH     311
 #define tTAGOF      312
-#define tREL        313
+#define tVAR        313
 #define tTHEN       314
 #define tWHILE      315
 /* compiler directives */

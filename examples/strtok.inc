@@ -3,15 +3,15 @@
 
 strtok(const string[], &index)
     {
-    rel length = strlen(string)
+    *var length = strlen(string)
 
     /* skip leading white space */
     while (index < length && string[index] <= ' ')
         index++
 
     /* store the word letter for letter */
-    rel offset = index                /* save start position of token */
-    rel result[20]                    /* string to store the word in */
+    *var offset = index                /* save start position of token */
+    *var result[20]                    /* string to store the word in */
     while (index < length
            && string[index] > ' '
            && index - offset < sizeof result - 1)

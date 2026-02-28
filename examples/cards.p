@@ -16,21 +16,21 @@ enum CardDescription
     CardValue,
     }
 
-rel CardNames[CardTypes][] = { !"Ace", !"Two", !"Three", !"Four", !"Five",
+*var CardNames[CardTypes][] = { !"Ace", !"Two", !"Three", !"Four", !"Five",
                                !"Six", !"Seven", !"Eight", !"Nine", !"Ten",
                                !"Jack", !"Queen", !"King" }
-rel CardValues[CardTypes]  = { 11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10 }
+*var CardValues[CardTypes]  = { 11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10 }
 
 main()
     {
-    rel Cards[ TotalCards ][ CardDescription ]
+    *var Cards[ TotalCards ][ CardDescription ]
 
     /* fill in the cards */
-    for (rel suit = 0; suit < CardSuits; suit++)
+    for (*var suit = 0; suit < CardSuits; suit++)
         {
-        for (rel card = 0; card < CardTypes; card++)
+        for (*var card = 0; card < CardTypes; card++)
             {
-            rel index = suit*CardTypes + card
+            *var index = suit*CardTypes + card
             strpack Cards[ index ][CardName], CardNames[ card ]
             Cards[ index ][ CardSuit ] = suit
             Cards[ index ][ CardValue ] = CardValues[ card ]
@@ -38,24 +38,24 @@ main()
         }
 
     /* shuffle the cards (swap an arbitrary number of randomly selected cards) */
-    for (rel iter = 0; iter < 200; iter++)
+    for (*var iter = 0; iter < 200; iter++)
         {
-        rel first = random(TotalCards)
-        rel second = random(TotalCards)
-        rel TempCard[ CardDescription ]
+        *var first = random(TotalCards)
+        *var second = random(TotalCards)
+        *var TempCard[ CardDescription ]
         TempCard = Cards[first]
         Cards[ first ] = Cards[ second ]
         Cards[ second ] = TempCard
         }
 
     /* print the cards with a subroutine */
-    for (rel card = 0; card < TotalCards; card++)
+    for (*var card = 0; card < TotalCards; card++)
         PrintCard Cards[ card]
     }
 
 PrintCard( TheCard[ CardDescription ] )
     {
-    rel SuitNames[ CardSuits ][] = { !"Clubs", !"Diamonds",
+    *var SuitNames[ CardSuits ][] = { !"Clubs", !"Diamonds",
                                      !"Hearts", !"Spades" }
 
     printf !"%s of %s (valued %d)\n",

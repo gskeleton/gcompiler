@@ -4,7 +4,7 @@ main()
     {
     printf "Argument count = %d\n", argcount()
 
-    rel opt[100]
-    for (rel index = 0; argindex(index, opt); index++)
+    *var opt[100]
+    for (*var index = 0; argindex(index, opt); index++)
         printf "Argument %d = %s\n", index, opt
     }

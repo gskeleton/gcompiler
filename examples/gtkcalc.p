@@ -23,7 +23,7 @@ static Btn:pending_op
 
 adddigit(digit, bool:reset = false)
     {
-    rel command[80 char], charstr[2 char]
+    *var command[80 char], charstr[2 char]
     charstr{0} = (0 <= digit <= 9) ? digit + '0' : digit
     if (reset)
         numberstring[0] = EOS
@@ -34,7 +34,7 @@ adddigit(digit, bool:reset = false)
 
 displayresult(value)
     {
-    rel command[80 char]
+    *var command[80 char]
     valstr numberstring, value, true
     strformat command, _, true, "gtk_entry_set_text %d %s", entry, numberstring
     GTK(command)
@@ -108,7 +108,7 @@ event_minus() <>
 performoperation()
     {
     /* get the other operand, perform the operation */
-    rel val = strval(numberstring)
+    *var val = strval(numberstring)
     switch (pending_op)
         {
         case BtnPlus:   accum += val
@@ -170,12 +170,12 @@ main()
 
     /* make a window */
     GTK("gtk_init NULL NULL")
-    rel win = GTK("gtk_window_new 0")
+    *var win = GTK("gtk_window_new 0")
     GTK("gtk_window_set_title %d \"Pawn calculator\"", win)
     GTK("gtk_widget_set_usize %d 200 200", win)
 
     /* add a table (align the other controls) */
-    rel table = GTK("gtk_table_new 50 50 1")
+    *var table = GTK("gtk_table_new 50 50 1")
     GTK("gtk_container_add %d %d", win, table)
 
     /* the number entry */
@@ -183,7 +183,7 @@ main()
     GTK("gtk_table_attach_defaults %d %d 1 49 1 9", table, entry)
 
     /* the key pad */
-    rel buttons[Btn]
+    *var buttons[Btn]
     buttons[BtnDot] = GTK("gtk_button_new_with_label .")
     GTK("gtk_table_attach_defaults %d %d 21 29 41 49", table, buttons[BtnDot])
     buttons[Btn0] = GTK("gtk_button_new_with_label 0")
@@ -230,8 +230,8 @@ main()
     GTK("gtk_widget_show_all %d", win)
 
     resetentry 0
-    rel event
-    rel Btn:idx
+    *var event
+    *var Btn:idx
     do
         {
         event = GTK("gtk_server_callback wait")
@@ -267,7 +267,7 @@ main()
 
 GTK(const format[], ...)
     {
-    rel command[256 char]
+    *var command[256 char]
     switch (numargs())
         {
         case 1:
@@ -283,7 +283,7 @@ GTK(const format[], ...)
         }
     procwrite command, true
 
-    rel reply[30]
+    *var reply[30]
     procread reply, .striplf=true
     if (strcmp(reply, "ok") == 0)
         return true

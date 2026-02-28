@@ -3,7 +3,7 @@
 main()
     {
     print "Enter a value: "
-    rel v = getvalue()
+    *var v = getvalue()
     if (v > 0)
         printf "The value of Fibonacci number %d is %d\n",
                v, fibonacci(v)
@@ -15,10 +15,10 @@ fibonacci(n)
     {
     assert n > 0
 
-    rel a = 0, b = 1
-    for (rel i = 2; i < n; i++)
+    *var a = 0, b = 1
+    for (*var i = 2; i < n; i++)
         {
-        rel c = a + b
+        *var c = a + b
         a = b
         b = c
         }

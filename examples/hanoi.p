@@ -3,7 +3,7 @@
 main()
     {
     print "How many disks: "
-    rel disks = getvalue()
+    *var disks = getvalue()
     move 1, 3, 2, disks
     }
 
