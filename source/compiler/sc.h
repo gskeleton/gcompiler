@@ -914,6 +914,7 @@ SC_VDECL int pc_optimize;     /* (peephole) optimization level */
 SC_VDECL int pc_memflags;     /* special flags for the stack/heap usage */
 SC_VDECL int pc_naked;        /* if true mark following function as naked */
 SC_VDECL int pc_recursion;    /* enable detailed recursion report? */
+SC_VDECL int pc_cellsize;     /* size (in bytes) of a cell */
 
 SC_VDECL constvalue_root sc_automaton_tab; /* automaton table */
 SC_VDECL constvalue_root sc_state_tab;     /* state table */
